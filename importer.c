@@ -12,12 +12,19 @@ Key randomKey(tVector *vector)
 {
     while (true)
     {
-        int num = rand();
+        int num = rand() % 1000;
+        bool alreadyInUse = false;
         for (int i = 0; i < vector->count; i++)
         {
-            if (vector->pairs->key == num)
-                continue;
+            if (vector->pairs[i].key == num)
+            {
+                alreadyInUse = true;
+                break;
+            }
         }
+
+        if (alreadyInUse)
+            continue;
         return num;
     }
 }
@@ -52,7 +59,7 @@ tVector importFileAscendingKeys()
     {
         tPair pair = Pair_Create(key, word);
         key++;
-        
+
         Vector_Add(&vector, pair);
     }
 
@@ -71,8 +78,12 @@ tVector importFileDescendingKeys()
     {
         tPair pair = Pair_Create(key, word);
         key++;
-        
-        Vector_PushFront(&vector, pair);
+
+        Vector_Add(&vector, pair);
+    }
+
+    for (int i = 0; i < vector.count; i++) {
+        vector.pairs[i].key = vector.count - i;
     }
 
     return vector;

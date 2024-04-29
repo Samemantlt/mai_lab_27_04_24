@@ -1,19 +1,12 @@
-#define TESTS
-
 #include "vector.h"
-#include "tests.c"
+// #include "tests.c"
 #include "importer.h"
-
+#include "cli.h"
 
 int main()
 {
-#ifdef TESTS
-    testVector();
-#endif
-
-    tVector words = importFileAscendingKeys();
-
-    Vector_Print(&words);
+    tVector words = readWords();
+    showCli(&words);
 
     return 0;
 }

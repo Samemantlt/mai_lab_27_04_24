@@ -27,8 +27,6 @@ void Vector_IncreaseCapacity(tVector* vector);
 
 void Vector_Add(tVector* vector, tPair pair);
 
-void Vector_PushFront(tVector* vector, tPair pair);
-
 void Vector_Sort(tVector* vector);
 
 tPair* Vector_BinarySearch(tVector* vector, Key key);

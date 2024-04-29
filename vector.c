@@ -1,7 +1,8 @@
 #pragma once
 #include "vector.h"
 
-tPair Pair_Create(Key key, Value value) {
+tPair Pair_Create(Key key, Value value)
+{
     tPair pair;
     pair.key = key;
 
@@ -10,19 +11,21 @@ tPair Pair_Create(Key key, Value value) {
     return pair;
 }
 
-tVector Vector_Create() {
+tVector Vector_Create()
+{
     tVector vector;
     vector.count = 0;
     vector.capacity = 2;
-    vector.pairs = (tPair*)calloc(vector.capacity, sizeof(tPair));
+    vector.pairs = (tPair *)calloc(vector.capacity, sizeof(tPair));
     return vector;
 }
 
-void Vector_IncreaseCapacity(tVector* vector) {
+void Vector_IncreaseCapacity(tVector *vector)
+{
     int current = vector->capacity;
     int next = current * 2;
-    
-    tPair* newArray = calloc(next, sizeof(tPair));
+
+    tPair *newArray = calloc(next, sizeof(tPair));
     memcpy(newArray, vector->pairs, vector->capacity * sizeof(tPair));
     free(vector->pairs);
 
@@ -30,31 +33,24 @@ void Vector_IncreaseCapacity(tVector* vector) {
     vector->capacity = next;
 }
 
-void Vector_Add(tVector* vector, tPair pair) {
-    if (vector->count + 1 > vector->capacity) {
+void Vector_Add(tVector *vector, tPair pair)
+{
+    if (vector->count + 1 > vector->capacity)
+    {
         Vector_IncreaseCapacity(vector);
     }
     vector->pairs[vector->count++] = pair;
 }
 
-void Vector_PushFront(tVector* vector, tPair pair) {
-    if (vector->count + 1 < vector->capacity) {
-        Vector_IncreaseCapacity(vector);
-    }
-    for (int i = vector->count - 1; i >= 0 ; i--) {
-        vector->pairs[i + 1] = vector->pairs[i];
-    }
-    vector->pairs[0] = pair;
-    vector->count++;
-}
-
-void switchPairs(tPair* a, tPair* b) {
+void switchPairs(tPair *a, tPair *b)
+{
     tPair c = *a;
     *a = *b;
     *b = c;
 }
 
-void Vector_Sort(tVector* vector) {
+void Vector_Sort(tVector *vector)
+{
     int offset = vector->count / 2;
     while (offset > 0)
     {
@@ -75,7 +71,8 @@ void Vector_Sort(tVector* vector) {
     }
 }
 
-void Vector_PrintDebug(tVector* vector) {
+void Vector_PrintDebug(tVector *vector)
+{
     printf("Keys (%i): ", vector->count);
     if (vector->count >= 1)
         printf("%lli", vector->pairs[0].key);
@@ -86,7 +83,8 @@ void Vector_PrintDebug(tVector* vector) {
     printf("\n");
 }
 
-void Vector_Print(tVector* vector) {
+void Vector_Print(tVector *vector)
+{
     printf("Key\tValue\n");
     for (int i = 0; i < vector->count; i++)
     {
@@ -94,20 +92,22 @@ void Vector_Print(tVector* vector) {
     }
 }
 
-tPair* Vector_BinarySearch(tVector* vector, Key key)
+tPair *Vector_BinarySearch(tVector *vector, Key key)
 {
-    int step = vector->count / 2;
-    int i = step;
-    while (step > 0) {
-        step /= 2;
-        if (vector->pairs[i].key > key) {
-            i += step;
-        } else if (vector->pairs[i].key == key) {
-            return &vector->pairs[i];
+    int l = 0;
+    int r = vector->count - 1;
+    tPair* pairs = vector->pairs;
+
+    while (r >= l)
+    {
+        int mid = l + (r - l) / 2;
+        if (pairs[mid].key == key)
+            return &pairs[mid];
+        if (pairs[mid].key > key) {
+            r = mid - 1;
         } else {
-            i -= step;
+            l = mid + 1;
         }
     }
-
     return NULL;
 }

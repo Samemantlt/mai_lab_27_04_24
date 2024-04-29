@@ -73,7 +73,16 @@ void findInVector(tVector *vector, bool sorted)
         return;
     }
 
-    printf("Finding\n\n");
+    Key key;
+    printf("Enter key: ");
+    scanf("%lli", &key);
+
+    tPair* pair = Vector_BinarySearch(vector, key);
+    if (pair == NULL) {
+        printf("[ERROR] Key not found %lli\n\n", key);
+        return;
+    }
+    printf("Found: %lli : %s\n\n", key, pair->value);
 }
 
 void showCli(tVector *vector)
