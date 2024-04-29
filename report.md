@@ -41,22 +41,97 @@
 
 ## 6. Идея, метод, алгоритм решения задачи
 
-Сюда идею, алгоритм вашего решения
+Сортируем вставками с шагом равным половине предыдущего (изначальный размер - половина длины массива).
 
 ## 7. Сценарий выполнения работы
 
 План:
-Будем делать то, то и то, в таком порядке...
+1. Берём за шаг половину длины массива
+2. Сортируем вставками с заданным шагом
+3. Делим шаг на два. Если шаг равен 0, завершаем алгоритм
+4. Возвращаемся к п.2
 
 ## 8. Распечатка протокола
 
 ```
-Вставьте сюда пример работы вашей программы для нескольких тестовых примеров:
-Входные данные (запуск и передаваемые аргументы)
+abc@d2d3eecc79b4:~/workspace/mai_lab_27_04_24$ ./a.out 
+[MENU] Select key strategy
+0 - Sorted (asc)
+1 - Sorted (desc)
+2 - Random
+2
+[MENU] Select operation
+0 - Print
+1 - Sort
+2 - Find (only for sorted)
+Select: 0
+Key     Value
+383     I've
+886     paid
+777     my
+915     dues
+793     Time
+335     after
+386     time
+...
+669     are
+82      the
+542     champions
 
-Вывод программы
+[MENU] Select operation
+0 - Print
+1 - Sort
+2 - Find (only for sorted)
+Select: 1
+Sorted
 
+[MENU] Select operation
+0 - Print
+1 - Sort
+2 - Find (only for sorted)
+Select: 0
+Key     Value
+11      mean
+12      me
+19      on
+22      But
+27      But
+29      the
+31      I
+34      We
+42      to
+...
+929     my
+932     curtain
+936     No
+954     'Cause
+956     friends
+965     And
+980     my
+987     the
+996     keep
 
+[MENU] Select operation
+0 - Print
+1 - Sort
+2 - Find (only for sorted)
+Select: 2
+Enter key: 936
+Found: 936 : No
+
+[MENU] Select operation
+0 - Print
+1 - Sort
+2 - Find (only for sorted)
+Select: 2
+Enter key: 937
+[ERROR] Key not found 937
+
+[MENU] Select operation
+0 - Print
+1 - Sort
+2 - Find (only for sorted)
+Select: ^C
 ```
 
 ## 9. Дневник отладки
