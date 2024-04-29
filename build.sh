@@ -1,0 +1,1 @@
+gcc -g tests.c cli.h cli.c main.c vector.c vector.h importer.c importer.h
